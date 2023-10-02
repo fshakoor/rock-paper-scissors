@@ -2,10 +2,10 @@ let choices = ['Rock','Paper','Scissors'];
 let playerCount = 0;
 let computerCount = 0;
 
-function askInput() {
-    let input = prompt('Choose rock, paper, or scissors. ');
-    return input.toLowerCase();
-};
+// function askInput() {
+//     let input = prompt('Choose rock, paper, or scissors. ');
+//     return input.toLowerCase();
+// };
 
 function computerChoice(choices) {
     let index = Math.floor(Math.random()*choices.length);
