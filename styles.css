@@ -1,13 +1,14 @@
 * {
     background-color: #2E1F27;
     color: #F7F5FB;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 h1 {
     display: flex;
     padding: 0;
     justify-content: center;
+    margin: 30px;
 }
 
 .buttons {
@@ -29,4 +30,16 @@ h1 {
     background-color: #854D27;
     border: 1px white solid;
     cursor: pointer;
+}
+
+.display {
+    display: flex;
+    background-color: #DD7230;
+    padding: 0;
+    justify-content: center;
+    margin: 30px;
+}
+
+.display, .buttons button, .container {
+    border-radius: 8px;
 }

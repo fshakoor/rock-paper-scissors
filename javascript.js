@@ -1,11 +1,14 @@
 let choices = ['Rock','Paper','Scissors'];
 let playerCount = 0;
 let computerCount = 0;
-
-// function askInput() {
-//     let input = prompt('Choose rock, paper, or scissors. ');
-//     return input.toLowerCase();
-// };
+const bodySelect = document.querySelector('body');
+const display = document.createElement('div');
+bodySelect.appendChild(display)
+const displayedText = document.createElement('p')
+display.appendChild(displayedText)
+const rockButton = document.querySelector('#rock-button')
+const paperButton = document.querySelector('#paper-button')
+const scissorsButton = document.querySelector('#scissors-button')
 
 function computerChoice(choices) {
     let index = Math.floor(Math.random()*choices.length);
@@ -13,56 +16,83 @@ function computerChoice(choices) {
     return choice;
 };
 
-function playRound(choices) {
-    let playerChoice = askInput();
+function playRound(choices,choice) {
+    let playerChoice = choice;
     let computersChoice = computerChoice(choices);
     // wins
     if (playerChoice === 'rock' && computersChoice === 'Scissors') {
-        console.log('You win! Rock beats scissors');
         return 'pwin';
     } else if (playerChoice === 'paper' && computersChoice === 'Rock') {
-        console.log('You win! Paper beats rock!');
         return 'pwin';
     } else if (playerChoice === 'scissors' && computersChoice == 'Paper') {
-        console.log('You win! Scissors beats paper!');
         return 'pwin';
     };
     // losses
     if (playerChoice === 'scissors' && computersChoice === 'Rock') {
-        console.log('You lose! Rock beats scissors');
         return 'plose';
     } else if (playerChoice === 'rock' && computersChoice === 'Paper') {
-        console.log('You lose! Paper beats rock!');
         return 'plose';
     } else if (playerChoice === 'paper' && computersChoice == 'Scissors') {
-        console.log('You lose! Scissors beats paper!')
         return 'plose';
     };
     // draws
     if (playerChoice === 'scissors' && computersChoice === 'Scissors') {
-        console.log('Draw! You both picked scissors.');
         return 'pdraw';
     } else if (playerChoice === 'rock' && computersChoice === 'Rock') {
-        console.log('Draw! You both picked rock.');
         return 'pdraw';
     } else if (playerChoice === 'paper' && computersChoice == 'Paper') {
-        console.log('Draw! You both picked paper.');
         return 'pdraw';
     };
 };
 
-function game(playerCount,computerCount) {
-    for (let i = 0; i < 5; i++) {
-        let play = playRound(choices);
-        if (play === 'pwin') {playerCount++}
-        else if (play === 'plose') {computerCount++}
-        else if (play === 'pdraw') {playerCount += 0; computerCount += 0;}
-        console.log("Score is " + playerCount + " for the user and " + computerCount + " for the computer.");
-    };
-
-    if (playerCount > computerCount) {console.log('Player wins! Score: ' + playerCount+'-'+computerCount + '.')}
-    else if (playerCount < computerCount) {console.log('Player loses! Score: ' + playerCount+'-'+computerCount + '.')}
-    else {console.log('Draw! Score: ' + playerCount+'-'+computerCount + '.')}
+function checkWin(play) {
+    if (play === 'pwin') {
+        playerCount++
+        return ('Player wins this round! Current score: ' + playerCount+'-'+computerCount + '.')
+    }
+    else if (play === 'plose') {
+        computerCount++
+        return 'Player loses this round. Current score: ' + playerCount+'-'+computerCount + '.'
+    }
+    else if (play === 'pdraw') {
+        playerCount += 0; computerCount += 0;
+        return 'Draw! Current score: ' + playerCount+'-'+computerCount + '.'
+    }
 };
 
-game(playerCount,computerCount);
+rockButton.addEventListener('click', () => {
+    display.classList.add('display');
+    displayedText.classList.add('display');
+    let play = playRound(choices,'rock');
+    let result = checkWin(play);
+    if (playerCount < 5 && computerCount < 5) {displayedText.textContent = result}
+    if (playerCount == 5 && computerCount < 5 || playerCount < 5 && computerCount == 5) {
+        if (playerCount > computerCount) {displayedText.textContent = 'You win! Final score is ' + playerCount + ' - ' + computerCount + '.'}
+        else {displayedText.textContent = 'You lose. Final score is ' + playerCount + ' - ' + computerCount + '.'}
+    }
+  });
+
+
+paperButton.addEventListener('click', () => {
+    display.classList.add('display');
+    let play = playRound(choices,'paper');
+    let result = checkWin(play);
+    if (playerCount < 5 && computerCount < 5) {displayedText.textContent = result}
+    if (playerCount == 5 && computerCount < 5 || playerCount < 5 && computerCount == 5) {
+        if (playerCount > computerCount) {displayedText.textContent = 'You win! Final score is ' + playerCount + ' - ' + computerCount + '.'}
+        else {displayedText.textContent = 'You lose. Final score is ' + playerCount + ' - ' + computerCount + '.'}
+    }
+  });
+
+scissorsButton.addEventListener('click', () => {
+    display.classList.add('display');
+    let play = playRound(choices,'scissors');
+    let result = checkWin(play);
+    if (playerCount < 5 && computerCount < 5) {displayedText.textContent = result}
+    if (playerCount == 5 && computerCount < 5 || playerCount < 5 && computerCount == 5) {
+        if (playerCount > computerCount) {displayedText.textContent = 'You win! Final score is ' + playerCount + ' - ' + computerCount + '.'}
+        else {displayedText.textContent = 'You lose. Final score is ' + playerCount + ' - ' + computerCount + '.'}
+    }
+  });
+
+  // if player score or computer score = 5, 
