@@ -32,6 +32,10 @@ h1 {
     cursor: pointer;
 }
 
+.buttons button:hover {
+    background-color: #F4C95D;
+}
+
 .display {
     display: flex;
     background-color: #DD7230;
